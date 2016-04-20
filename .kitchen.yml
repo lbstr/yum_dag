@@ -16,14 +16,25 @@ suites:
       network:
         - ["private_network", {ip: "192.168.20.2"}]
     run_list:
-      - recipe[yum_dag::default]
+      - recipe[yum_dag::seed_packages]
+      - recipe[yum_dag::create_repo]
+      - recipe[yum_dag::enable_downstreams]
     attributes:
+      yum_dag:
+        seed_packages:
+          repotrack:
+            - createrepo
+            - httpd
   - name: node_b
     driver:
       network:
         - ["private_network", {ip: "192.168.20.3"}]
     run_list:
-      - recipe[yum_dag::default]
+      - recipe[yum_dag::remove_other_upstreams]
+      - recipe[yum_dag::add_upstreams]
+      - recipe[yum_dag::sync_to_upstreams]
+      - recipe[yum_dag::create_repo]
+      - recipe[yum_dag::enable_downstreams]
     attributes:
       yum_dag:
         upstreams:
@@ -35,7 +46,10 @@ suites:
       network:
         - ["private_network", {ip: "192.168.20.4"}]
     run_list:
-      - recipe[yum_dag::default]
+      - recipe[yum_dag::remove_other_upstreams]
+      - recipe[yum_dag::add_upstreams]
+      - recipe[yum_dag::sync_to_upstreams]
+      - recipe[yum_dag::create_repo]
     attributes:
       yum_dag:
         upstreams:
