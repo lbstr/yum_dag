@@ -11,10 +11,37 @@ platforms:
       box: geerlingguy/centos6
 
 suites:
-  - name: default
+  - name: node_a
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.20.2"}]
+    run_list:
+      - recipe[yum_dag::default]
+    attributes:
+  - name: node_b
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.20.3"}]
     run_list:
       - recipe[yum_dag::default]
     attributes:
       yum_dag:
         upstreams:
-          - repo_id: repo_a
+          - repoid: node_a
+            description: "Node A"
+            baseurl: "http://192.168.20.2/"
+  - name: node_c
+    driver:
+      network:
+        - ["private_network", {ip: "192.168.20.4"}]
+    run_list:
+      - recipe[yum_dag::default]
+    attributes:
+      yum_dag:
+        upstreams:
+          - repoid: node_a
+            description: "Node A"
+            baseurl: "http://192.168.20.2/"
+          - repoid: node_b
+            description: "Node B"
+            baseurl: "http://192.168.20.3/"
