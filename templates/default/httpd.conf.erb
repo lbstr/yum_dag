@@ -1,0 +1,48 @@
+
+#
+# ServerName gives the name and port that the server uses to identify itself.
+# This can often be determined automatically, but we recommend you specify
+# it explicitly to prevent problems during startup.
+#
+# If this is not set to valid DNS name for your host, server-generated
+# redirections will not work.  See also the UseCanonicalName directive.
+#
+# If your host doesn't have a registered DNS name, enter its IP address here.
+# You will have to access it by its address anyway, and this will make 
+# redirections work in a sensible way.
+#
+ServerName <%= @ip %>:80
+
+#
+# Each directory to which Apache has access can be configured with respect
+# to which services and features are allowed and/or disabled in that
+# directory (and its subdirectories). 
+#
+# First, we configure the "default" to be a very restrictive set of 
+# features.  
+#
+<Directory />
+    Options FollowSymLinks Indexes
+    AllowOverride None
+</Directory>
+
+#
+# Use name-based virtual hosting.
+#
+# NameVirtualHost *:80
+#
+# NOTE: NameVirtualHost cannot be used without a port specifier 
+# (e.g. :80) if mod_ssl is being used, due to the nature of the
+# SSL protocol.
+#
+
+#
+# VirtualHost example:
+# Almost any Apache directive may go into a VirtualHost container.
+# The first VirtualHost section is used for requests without a known
+# server name.
+#
+<VirtualHost *:80>
+    DocumentRoot <%= @doc_root %>
+    ServerName <%= @server_name %>.local
+</VirtualHost>

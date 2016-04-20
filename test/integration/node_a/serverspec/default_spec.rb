@@ -37,7 +37,6 @@ describe file("/var/www/yum/repodata") do
   it { should be_directory }
 end
 
-<<-PASTEBIN
 # make sure apache is installed
 describe package('httpd') do
   it { should be_installed }
@@ -47,4 +46,9 @@ end
 describe file('/etc/httpd/conf/httpd.conf') do
   it { should exist }
 end
-PASTEBIN
+
+# make sure our httpd config is in place
+describe file('/etc/httpd-default/conf.d/localyum.conf') do
+  it { should exist }
+end
+

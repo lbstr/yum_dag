@@ -7,4 +7,4 @@ long_description 'Installs/Configures yum_dag'
 version '0.1.0'
 
 depends 'yum', '~> 3.10.0'
-depends 'yumrepo_server', '~> 0.2.1'
+depends 'httpd', '~> 0.2'
