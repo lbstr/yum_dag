@@ -11,7 +11,7 @@ end
 
 node['yum_dag']['upstreams'].each do |upstream|
   yum_repository upstream.repoid do
-    baseurl      upstream.baseurl
+    baseurl       upstream.baseurl
     description   upstream.description || upstream.repoid
     enabled       true
     gpgcheck      false
