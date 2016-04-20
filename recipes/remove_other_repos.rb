@@ -6,9 +6,8 @@
 
 def is_remote?(repo_id)
   node['yum_dag'] && 
-  node['yum_dag']['remote'] && 
-  node['yum_dag']['remote']['id'] &&
-  repo_id == node['yum_dag']['remote']['id']
+  node['yum_dag']['upstreams'] && 
+  node['yum_dag']['upstreams'].any? { |upstream| upstream.repo_id == repo_id }
 end
 
 Dir.glob('/etc/yum.repos.d/*.repo') do |repo_file|

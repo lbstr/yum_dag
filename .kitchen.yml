@@ -15,3 +15,6 @@ suites:
     run_list:
       - recipe[yum_dag::default]
     attributes:
+      yum_dag:
+        upstreams:
+          - repo_id: repo_a
