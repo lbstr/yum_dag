@@ -1,7 +1,10 @@
 name 'yum_dag'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Jared Barnett'
+maintainer_email 'jared.barnett@gmail.com'
 license 'all_rights'
 description 'Installs/Configures yum_dag'
 long_description 'Installs/Configures yum_dag'
 version '0.1.0'
+
+depends 'yum', '~> 3.10.0'
+depends 'yumrepo_server', '~> 0.2.1'
