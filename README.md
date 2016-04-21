@@ -51,7 +51,13 @@ Chef cookbook for creating a directed acyclic graph ([DAG](https://en.wikipedia.
 
 ## Usage
 
-_*TODO*_
+There are several recipes, but you'll likely want to use one of the default recipes depending on your node's needs:
+
+| Recipe         | Internet access? | Downstream repos? | Description |
+| -------------- | ---------------- | ----------------- | ----------- |
+| default_source | Yes              | Yes               | This is a node you can use to grab packages from the internet so that they are avilable to downstream nodes. Useful for downstream nodes that are offline and rely on a source to provide packages from the internet. |
+| default        | No               | Yes               | This is a node that syncs to upstream nodes and exposes itself over http to downstream nodes. |
+| default_sink   | No               | No                | This is a node that syncs to upstream nodes, but has no downstream nodes and therefore no need for a web server. |
 
 ## LWRP
 
