@@ -1,14 +1,12 @@
 require 'spec_helper'
 
-# make sure the seed packages downloaded correctly
+# make sure we have rpms in our local repo
 describe file('/var/www/yum') do
   it { should be_directory }
   it "should have rpms" do
     Dir.glob('/var/www/yum/*.rpm').should_not be_empty
   end
 end
-
-# TODO: confirm createrepo and httpd packages are available for installation from the local repo
 
 # make sure we have a repo file for our local repo
 describe file('/etc/yum.repos.d/local.repo') do
